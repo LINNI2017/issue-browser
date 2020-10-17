@@ -14,11 +14,21 @@ const MainPage = props => {
   console.log(page)
   console.log(data)
 
+  const handleClickPage = (e, pageIdx) => {
+    e.preventDefault()
+    setPage(pageIdx)
+    getPageIssue(setData, pageIdx, PER_PAGE)
+  }
+
   const getPageItems = (page) => {
     let items = []
     for (let i = 1; i <= size; i++) {
       items.push(
-        <Pagination.Item key={`page-${i}`} active={page === i}>
+        <Pagination.Item
+          key={`page-${i}`}
+          active={page === i}
+          onClick={(e)=>handleClickPage(e, i)}
+        >
           {i}
         </Pagination.Item>
       )
@@ -62,7 +72,7 @@ const MainPage = props => {
           <Pagination.Next onClick={(e)=>setNextPage(e)}/>
         </Pagination>
         {
-          data && data.map((info, idx) => {
+          data && data.map((info) => {
             return (
               <Card key={`issue-${info.number}`}>
                 <Card.Body>
@@ -71,7 +81,7 @@ const MainPage = props => {
                       #{info.number}
                     </span>
                     <Link
-                      to={`/issue/${idx+1}`}
+                      to={`/issue/${info.number}`}
                       style={{ marginRight: "1rem" }}
                     >
                       {info.title}

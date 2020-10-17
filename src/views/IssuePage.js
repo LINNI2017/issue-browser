@@ -26,6 +26,9 @@ const IssuePage = props => {
         data &&
         <>
           <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
+            <div style={{ fontSize: "2rem", marginRight: "1rem" }}>
+              #{data.number}
+            </div>
             <div style={{ fontSize: "2rem", marginRight: "2rem" }}>
               {data.title}
             </div>
